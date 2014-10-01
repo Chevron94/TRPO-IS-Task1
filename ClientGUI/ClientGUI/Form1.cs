@@ -63,5 +63,12 @@ namespace ClientGUI
                 Client.Disconnect();
        
         }
+
+        private void MessageInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+                SendButton.PerformClick();
+        }
+
     }
 }

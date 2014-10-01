@@ -48,7 +48,7 @@
             this.DisconnectClient});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(448, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,9 +69,9 @@
             // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(95, 299);
+            this.SendButton.Location = new System.Drawing.Point(12, 340);
             this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(75, 23);
+            this.SendButton.Size = new System.Drawing.Size(424, 23);
             this.SendButton.TabIndex = 1;
             this.SendButton.Text = "Send";
             this.SendButton.UseVisualStyleBackColor = true;
@@ -80,17 +80,19 @@
             // MessageLog
             // 
             this.MessageLog.FormattingEnabled = true;
-            this.MessageLog.Location = new System.Drawing.Point(0, 84);
+            this.MessageLog.HorizontalScrollbar = true;
+            this.MessageLog.Location = new System.Drawing.Point(12, 79);
             this.MessageLog.Name = "MessageLog";
-            this.MessageLog.Size = new System.Drawing.Size(284, 173);
+            this.MessageLog.Size = new System.Drawing.Size(424, 225);
             this.MessageLog.TabIndex = 2;
             // 
             // MessageInput
             // 
-            this.MessageInput.Location = new System.Drawing.Point(0, 273);
+            this.MessageInput.Location = new System.Drawing.Point(12, 314);
             this.MessageInput.Name = "MessageInput";
-            this.MessageInput.Size = new System.Drawing.Size(284, 20);
+            this.MessageInput.Size = new System.Drawing.Size(424, 20);
             this.MessageInput.TabIndex = 3;
+            this.MessageInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MessageInput_KeyDown);
             // 
             // NICK_FIELD
             // 
@@ -130,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 334);
+            this.ClientSize = new System.Drawing.Size(448, 375);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.IP_PORT_FIELD);
             this.Controls.Add(this.label1);
@@ -139,6 +141,7 @@
             this.Controls.Add(this.MessageLog);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Client";

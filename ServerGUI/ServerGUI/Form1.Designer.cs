@@ -37,10 +37,14 @@
             // 
             // MessageLog
             // 
+            this.MessageLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.MessageLog.FormattingEnabled = true;
-            this.MessageLog.Location = new System.Drawing.Point(0, 26);
+            this.MessageLog.HorizontalScrollbar = true;
+            this.MessageLog.Location = new System.Drawing.Point(12, 27);
             this.MessageLog.Name = "MessageLog";
-            this.MessageLog.Size = new System.Drawing.Size(283, 238);
+            this.MessageLog.Size = new System.Drawing.Size(424, 342);
             this.MessageLog.TabIndex = 0;
             // 
             // menuStrip1
@@ -50,7 +54,7 @@
             this.ServerStop});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(448, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -73,11 +77,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(448, 375);
             this.Controls.Add(this.MessageLog);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Server";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.menuStrip1.ResumeLayout(false);

@@ -54,10 +54,29 @@ namespace ServerGUI
             {
                 stop = true;
                 //Accepting.Abort();
+                SendMessages("");
                 Listner.Stop();
             }
         }
 
+       static void SendMessages(string Message)
+        {
+            StreamWriter writer;
+            for (int i = 0; i < Writers.Count; i++)
+            {
+                writer = (StreamWriter)Writers[i];
+                try
+                {
+                    writer.WriteLine(Message);
+                }
+                catch (Exception)
+                { }
+            }
+            if (Message == "")
+                Message = "SERVER SHUTDOWN!";
+            Message = "[" + DateTime.Now.ToString() + "] " + Message;
+            lb.Invoke(new Action(() => lb.Items.Add(Message)));
+        }
 
         static void ClientThread(Object StateInfo)
         {
@@ -65,6 +84,8 @@ namespace ServerGUI
             var stream = Client.GetStream();
             StreamReader reader = new StreamReader(stream);
             StreamWriter writer = new StreamWriter(stream);
+            string NickName = reader.ReadLine();
+            SendMessages("\""+NickName+"\"" + " CONNECTED!");
             Writers.Add(writer);
             writer.AutoFlush = true;
             while (Client.Connected)
@@ -72,12 +93,9 @@ namespace ServerGUI
                 try
                 {
                     Message = reader.ReadLine();
-                    for (int i = 0; i < Writers.Count; i++)
-                    {
-                        writer = (StreamWriter)Writers[i];
-                        writer.WriteLine(Message);
-                    }
-                    lb.Invoke(new Action(() => lb.Items.Add(Message)));
+                    if (Message == null)
+                        Message = "\"" + NickName + "\"" + " DISCONNECTED!"; 
+                    SendMessages(Message);
                 }
                 catch (Exception)
                 { }

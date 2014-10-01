@@ -34,6 +34,10 @@
             this.SendButton = new System.Windows.Forms.Button();
             this.MessageLog = new System.Windows.Forms.ListBox();
             this.MessageInput = new System.Windows.Forms.TextBox();
+            this.NICK_FIELD = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.IP_PORT_FIELD = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +69,7 @@
             // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(95, 227);
+            this.SendButton.Location = new System.Drawing.Point(95, 299);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(75, 23);
             this.SendButton.TabIndex = 1;
@@ -76,23 +80,61 @@
             // MessageLog
             // 
             this.MessageLog.FormattingEnabled = true;
-            this.MessageLog.Location = new System.Drawing.Point(0, 27);
+            this.MessageLog.Location = new System.Drawing.Point(0, 84);
             this.MessageLog.Name = "MessageLog";
             this.MessageLog.Size = new System.Drawing.Size(284, 173);
             this.MessageLog.TabIndex = 2;
             // 
             // MessageInput
             // 
-            this.MessageInput.Location = new System.Drawing.Point(0, 201);
+            this.MessageInput.Location = new System.Drawing.Point(0, 273);
             this.MessageInput.Name = "MessageInput";
             this.MessageInput.Size = new System.Drawing.Size(284, 20);
             this.MessageInput.TabIndex = 3;
+            // 
+            // NICK_FIELD
+            // 
+            this.NICK_FIELD.Location = new System.Drawing.Point(78, 27);
+            this.NICK_FIELD.Name = "NICK_FIELD";
+            this.NICK_FIELD.Size = new System.Drawing.Size(194, 20);
+            this.NICK_FIELD.TabIndex = 4;
+            this.NICK_FIELD.Text = "NickName";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "NickName:";
+            // 
+            // IP_PORT_FIELD
+            // 
+            this.IP_PORT_FIELD.Location = new System.Drawing.Point(78, 53);
+            this.IP_PORT_FIELD.Name = "IP_PORT_FIELD";
+            this.IP_PORT_FIELD.Size = new System.Drawing.Size(194, 20);
+            this.IP_PORT_FIELD.TabIndex = 6;
+            this.IP_PORT_FIELD.Text = "127.0.0.1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(52, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(20, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "IP:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 334);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.IP_PORT_FIELD);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.NICK_FIELD);
             this.Controls.Add(this.MessageInput);
             this.Controls.Add(this.MessageLog);
             this.Controls.Add(this.SendButton);
@@ -116,6 +158,10 @@
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.ListBox MessageLog;
         private System.Windows.Forms.TextBox MessageInput;
+        private System.Windows.Forms.TextBox NICK_FIELD;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox IP_PORT_FIELD;
+        private System.Windows.Forms.Label label2;
     }
 }
 

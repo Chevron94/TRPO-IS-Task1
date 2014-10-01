@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
@@ -13,36 +14,49 @@ namespace ClientGUI
     {
         TcpClient TClient;
         int Port;
+        string IP;
+        string NickName;
         StreamReader Reader;
         StreamWriter Writer;
         ListBox lb;
         Thread WaitMessage;
-        bool stop;
-
-        public Client(int port, ref ListBox _lb)
+       // bool stop;
+        public bool CONNECTED;
+        public Client(string ip, int port, string nickname, ref ListBox _lb)
         {
             Port = port;
+            IP = ip;
             TClient = new TcpClient();
             lb = _lb;
+            NickName = nickname;
+            CONNECTED = false;
         }
 
         public void Connect()
         {
-            TClient.Connect("localhost", Port);
-            stop = false;
-            var Stream = TClient.GetStream();
-            Reader = new StreamReader(Stream);
-            Writer = new StreamWriter(Stream);
-            Writer.AutoFlush = true;
-            WaitMessage = new Thread(new ThreadStart(ThreadClient));
-            WaitMessage.Start();
+            IPAddress Address;
+            if (IPAddress.TryParse(IP, out Address))
+            {
+                TClient.Connect(Address, Port);
+                // stop = false;
+                var Stream = TClient.GetStream();
+                Reader = new StreamReader(Stream);
+                Writer = new StreamWriter(Stream);
+                Writer.AutoFlush = true;
+                CONNECTED = true;
+                WaitMessage = new Thread(new ThreadStart(ThreadClient));
+                Writer.WriteLine(NickName);
+                WaitMessage.Start();
+            }
+            else MessageBox.Show("WRONG IP!");
         }
 
         public void Disconnect()
         {
             if (TClient.Connected)
             {
-                stop = true;
+              //  stop = true;
+                CONNECTED = false;
                 WaitMessage.Abort();
                 TClient.Close();
             }
@@ -50,15 +64,25 @@ namespace ClientGUI
 
         void ThreadClient()
         {
-            while (!stop)
+            while (TClient.Connected)
             {
                 try
                 {
                     string Message = Reader.ReadLine();
-                    lb.Invoke(new Action(() => lb.Items.Add(Message)));
+                    if (Message == "")
+                    {
+                        Message = "SERVER SHUTDOWN!";
+                        lb.Invoke(new Action(() => lb.Items.Add(Message)));
+                        Disconnect();
+                    }
+                    else
+                    {
+                        Message = "[" + DateTime.Now.ToString() + "] " + Message;
+                        lb.Invoke(new Action(() => lb.Items.Add(Message)));
+                    }
                 }
                 catch (Exception)
-                { stop = true; }
+                { Disconnect(); }
             }
         }
 

@@ -14,16 +14,32 @@ namespace ClientGUI
         public Form1()
         {
             InitializeComponent();
-            Client = new Client(6008,ref MessageLog);
+            Connected = false;
+            Application.Idle += MyIdle;
         }
+
+        void MyIdle(object sender, EventArgs e)
+        {
+            if (Client != null)
+            {
+                Connected = Client.CONNECTED;
+            }
+            ConnectClient.Enabled = !Connected && NICK_FIELD.Text.Trim() != "" && IP_PORT_FIELD.Text.Trim() != "";
+            DisconnectClient.Enabled = Connected;
+            NICK_FIELD.Enabled = !Connected;
+            IP_PORT_FIELD.Enabled = !Connected;
+            SendButton.Enabled = Connected && MessageInput.Text.Trim() != "";
+        }
+
         Client Client;
+        bool Connected;
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Client = new Client(IP_PORT_FIELD.Text, 6008, NICK_FIELD.Text, ref MessageLog);
             try
             {
                 Client.Connect();
-                ConnectClient.Enabled = false;
-                DisconnectClient.Enabled = true;
+                Connected = true;
             }
             catch (Exception)
             { MessageBox.Show("Server not responding"); }
@@ -31,20 +47,21 @@ namespace ClientGUI
 
         private void SendButton_Click(object sender, EventArgs e)
         {
-            Client.SendMessage(MessageInput.Text);
+            Client.SendMessage(NICK_FIELD.Text+": "+MessageInput.Text);
             MessageInput.Text = "";
         }
 
         private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Client.Disconnect();
-            ConnectClient.Enabled = true;
-            DisconnectClient.Enabled = false;
+            Connected = false;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Client.Disconnect();
+            if (Connected)
+                Client.Disconnect();
+       
         }
     }
 }
